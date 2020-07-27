@@ -1,0 +1,11 @@
+def f(n):
+    return n
+enddef
+
+def g(m):
+    return m
+enddef
+
+x = input()
+print(x)
+f(g(x))

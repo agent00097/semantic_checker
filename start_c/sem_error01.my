@@ -1,0 +1,13 @@
+!sem_error01.my
+def absv(x):
+  x = "hello"  !error: integer variable assigned string value 
+  if x<0 :	
+    return true	!error: return value cannot be boolean
+  else:
+    if x >= 0:  
+       return foo(x)	!error: function foo not declared yet
+    endif
+  endif
+enddef
+print (absv(2), "other", absv(-3))
+

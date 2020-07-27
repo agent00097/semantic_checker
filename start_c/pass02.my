@@ -1,0 +1,9 @@
+!pass02.my
+def countdown(n) :
+while n <> 0:
+    print (n)
+    s = input() 
+  endwhile
+  print ("Blastoff")
+enddef
+countdown(3) 

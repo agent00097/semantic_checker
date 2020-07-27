@@ -1,0 +1,12 @@
+!sem_error02.my
+def countdown(n) :
+  while n :	! error: n is not a boolean
+    print (n)
+    n = n - x	! error: x cannot be used before defined
+  endwhile	
+  print ("Blastoff")
+enddef
+def countdown(m) :	! error: duplicate definition of countdown
+  return 1
+enddef
+countdown(3) 

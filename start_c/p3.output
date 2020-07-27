@@ -1,0 +1,1535 @@
+Terminals unused in grammar
+
+   ERROR
+   NI
+
+
+Grammar
+
+    0 $accept: PROGRAM $end
+
+    1 PROGRAM: FUNCTION_LIST END_LIST
+
+    2 FUNCTION_LIST: FUNCTION_LIST FUNCTION
+    3              | FUNCTION
+
+    4 FUNCTION: DEF IDENTIFIER '(' PARAMATERS ')' COLON STATEMENTS ENDDEF
+    5         | DEF IDENTIFIER '(' ')' COLON STATEMENTS ENDDEF
+
+    6 PARAMATERS: PARAMATERS ',' IDHERE
+    7           | IDHERE
+
+    8 IDHERE: IDENTIFIER
+
+    9 STATEMENTS: STATEMENTS STATEMENT
+   10           | STATEMENT
+
+   11 STATEMENT: ASSIGNMENT_STMT
+   12          | PRINT_STMT
+   13          | INPUT_STMT
+   14          | CONDITION_STMT
+   15          | WHILE_STMT
+   16          | CALL_STMT
+   17          | RETURN_STMT
+
+   18 ASSIGNMENT_STMT: IDENTIFIER '=' EXPRESSION
+
+   19 RETURN_STMT: RETURN EXP
+
+   20 EXPRESSION: REL_EXP
+   21           | EXP
+
+   22 REL_EXP: EXP EQUALITY EXP
+   23        | EXP NOTEQUAL EXP
+   24        | EXP '<' EXP
+   25        | EXP LESSTHEO EXP
+   26        | EXP '>' EXP
+   27        | EXP GREATERTHEO EXP
+   28        | '(' REL_EXP ')'
+
+   29 EXP: EXP '+' TERM
+   30    | EXP '-' TERM
+   31    | TERM
+
+   32 TERM: TERM '*' FACTOR
+   33     | TERM '/' FACTOR
+   34     | FACTOR
+
+   35 FACTOR: '(' EXP ')'
+   36       | NUMBER
+   37       | STRING
+   38       | IDENTIFIER
+   39       | TRUE
+   40       | FALSE
+   41       | '-' FACTOR
+   42       | CALL_STMT
+
+   43 PRINT_STMT: PRINT '(' EXPRESSION_LIST ')'
+
+   44 INPUT_STMT: IDENTIFIER '=' INPUT '(' ')'
+
+   45 CALL_STMT: IDENTIFIER '(' ')'
+   46          | IDENTIFIER '(' EXPR_LIST ')'
+
+   47 CONDITION_STMT: IF_HEAD STATEMENTS ENDDIF
+   48               | IF_HEAD STATEMENTS ELSE COLON STATEMENTS ENDDIF
+
+   49 IF_HEAD: IF EXPRESSION COLON
+
+   50 WHILE_STMT: WHILE EXPRESSION COLON STATEMENTS ENDWHILE
+
+   51 EXPRESSION_LIST: EXPRESSION_LIST ',' EXPRESSION
+   52                | EXPRESSION
+
+   53 EXPR_LIST: EXPR_LIST ',' EXP
+   54          | EXP
+
+   55 END_LIST: END_LIST END
+   56         | END
+
+   57 END: CALL_STMT
+   58    | PRINT_STMT
+   59    | INPUT_STMT
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'(' (40) 4 5 28 35 43 44 45 46
+')' (41) 4 5 28 35 43 44 45 46
+'*' (42) 32
+'+' (43) 29
+',' (44) 6 51 53
+'-' (45) 30 41
+'/' (47) 33
+'<' (60) 24
+'=' (61) 18 44
+'>' (62) 26
+error (256)
+ERROR (258)
+EQUALITY (259) 22
+LESSTHEO (260) 25
+GREATERTHEO (261) 27
+NOTEQUAL (262) 23
+COLON (263) 4 5 48 49 50
+DEF (264) 4 5
+ENDDEF (265) 4 5
+IF (266) 49
+ENDDIF (267) 47 48
+ELSE (268) 48
+WHILE (269) 50
+ENDWHILE (270) 50
+PRINT (271) 43
+INPUT (272) 44
+TRUE (273) 39
+FALSE (274) 40
+RETURN (275) 19
+NUMBER (276) 36
+IDENTIFIER (277) 4 5 8 18 38 44 45 46
+STRING (278) 37
+NI (279)
+
+
+Nonterminals, with rules where they appear
+
+$accept (35)
+    on left: 0
+PROGRAM (36)
+    on left: 1, on right: 0
+FUNCTION_LIST (37)
+    on left: 2 3, on right: 1 2
+FUNCTION (38)
+    on left: 4 5, on right: 2 3
+PARAMATERS (39)
+    on left: 6 7, on right: 4 6
+IDHERE (40)
+    on left: 8, on right: 6 7
+STATEMENTS (41)
+    on left: 9 10, on right: 4 5 9 47 48 50
+STATEMENT (42)
+    on left: 11 12 13 14 15 16 17, on right: 9 10
+ASSIGNMENT_STMT (43)
+    on left: 18, on right: 11
+RETURN_STMT (44)
+    on left: 19, on right: 17
+EXPRESSION (45)
+    on left: 20 21, on right: 18 49 50 51 52
+REL_EXP (46)
+    on left: 22 23 24 25 26 27 28, on right: 20 28
+EXP (47)
+    on left: 29 30 31, on right: 19 21 22 23 24 25 26 27 29 30 35 53
+    54
+TERM (48)
+    on left: 32 33 34, on right: 29 30 31 32 33
+FACTOR (49)
+    on left: 35 36 37 38 39 40 41 42, on right: 32 33 34 41
+PRINT_STMT (50)
+    on left: 43, on right: 12 58
+INPUT_STMT (51)
+    on left: 44, on right: 13 59
+CALL_STMT (52)
+    on left: 45 46, on right: 16 42 57
+CONDITION_STMT (53)
+    on left: 47 48, on right: 14
+IF_HEAD (54)
+    on left: 49, on right: 47 48
+WHILE_STMT (55)
+    on left: 50, on right: 15
+EXPRESSION_LIST (56)
+    on left: 51 52, on right: 43 51
+EXPR_LIST (57)
+    on left: 53 54, on right: 46 53
+END_LIST (58)
+    on left: 55 56, on right: 1 55
+END (59)
+    on left: 57 58 59, on right: 55 56
+
+
+State 0
+
+    0 $accept: . PROGRAM $end
+
+    DEF  shift, and go to state 1
+
+    PROGRAM        go to state 2
+    FUNCTION_LIST  go to state 3
+    FUNCTION       go to state 4
+
+
+State 1
+
+    4 FUNCTION: DEF . IDENTIFIER '(' PARAMATERS ')' COLON STATEMENTS ENDDEF
+    5         | DEF . IDENTIFIER '(' ')' COLON STATEMENTS ENDDEF
+
+    IDENTIFIER  shift, and go to state 5
+
+
+State 2
+
+    0 $accept: PROGRAM . $end
+
+    $end  shift, and go to state 6
+
+
+State 3
+
+    1 PROGRAM: FUNCTION_LIST . END_LIST
+    2 FUNCTION_LIST: FUNCTION_LIST . FUNCTION
+
+    DEF         shift, and go to state 1
+    PRINT       shift, and go to state 7
+    IDENTIFIER  shift, and go to state 8
+
+    FUNCTION    go to state 9
+    PRINT_STMT  go to state 10
+    INPUT_STMT  go to state 11
+    CALL_STMT   go to state 12
+    END_LIST    go to state 13
+    END         go to state 14
+
+
+State 4
+
+    3 FUNCTION_LIST: FUNCTION .
+
+    $default  reduce using rule 3 (FUNCTION_LIST)
+
+
+State 5
+
+    4 FUNCTION: DEF IDENTIFIER . '(' PARAMATERS ')' COLON STATEMENTS ENDDEF
+    5         | DEF IDENTIFIER . '(' ')' COLON STATEMENTS ENDDEF
+
+    '('  shift, and go to state 15
+
+
+State 6
+
+    0 $accept: PROGRAM $end .
+
+    $default  accept
+
+
+State 7
+
+   43 PRINT_STMT: PRINT . '(' EXPRESSION_LIST ')'
+
+    '('  shift, and go to state 16
+
+
+State 8
+
+   44 INPUT_STMT: IDENTIFIER . '=' INPUT '(' ')'
+   45 CALL_STMT: IDENTIFIER . '(' ')'
+   46          | IDENTIFIER . '(' EXPR_LIST ')'
+
+    '('  shift, and go to state 17
+    '='  shift, and go to state 18
+
+
+State 9
+
+    2 FUNCTION_LIST: FUNCTION_LIST FUNCTION .
+
+    $default  reduce using rule 2 (FUNCTION_LIST)
+
+
+State 10
+
+   58 END: PRINT_STMT .
+
+    $default  reduce using rule 58 (END)
+
+
+State 11
+
+   59 END: INPUT_STMT .
+
+    $default  reduce using rule 59 (END)
+
+
+State 12
+
+   57 END: CALL_STMT .
+
+    $default  reduce using rule 57 (END)
+
+
+State 13
+
+    1 PROGRAM: FUNCTION_LIST END_LIST .
+   55 END_LIST: END_LIST . END
+
+    PRINT       shift, and go to state 7
+    IDENTIFIER  shift, and go to state 8
+
+    $default  reduce using rule 1 (PROGRAM)
+
+    PRINT_STMT  go to state 10
+    INPUT_STMT  go to state 11
+    CALL_STMT   go to state 12
+    END         go to state 19
+
+
+State 14
+
+   56 END_LIST: END .
+
+    $default  reduce using rule 56 (END_LIST)
+
+
+State 15
+
+    4 FUNCTION: DEF IDENTIFIER '(' . PARAMATERS ')' COLON STATEMENTS ENDDEF
+    5         | DEF IDENTIFIER '(' . ')' COLON STATEMENTS ENDDEF
+
+    IDENTIFIER  shift, and go to state 20
+    ')'         shift, and go to state 21
+
+    PARAMATERS  go to state 22
+    IDHERE      go to state 23
+
+
+State 16
+
+   43 PRINT_STMT: PRINT '(' . EXPRESSION_LIST ')'
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 29
+    '-'         shift, and go to state 30
+
+    EXPRESSION       go to state 31
+    REL_EXP          go to state 32
+    EXP              go to state 33
+    TERM             go to state 34
+    FACTOR           go to state 35
+    CALL_STMT        go to state 36
+    EXPRESSION_LIST  go to state 37
+
+
+State 17
+
+   45 CALL_STMT: IDENTIFIER '(' . ')'
+   46          | IDENTIFIER '(' . EXPR_LIST ')'
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 38
+    ')'         shift, and go to state 39
+    '-'         shift, and go to state 30
+
+    EXP        go to state 40
+    TERM       go to state 34
+    FACTOR     go to state 35
+    CALL_STMT  go to state 36
+    EXPR_LIST  go to state 41
+
+
+State 18
+
+   44 INPUT_STMT: IDENTIFIER '=' . INPUT '(' ')'
+
+    INPUT  shift, and go to state 42
+
+
+State 19
+
+   55 END_LIST: END_LIST END .
+
+    $default  reduce using rule 55 (END_LIST)
+
+
+State 20
+
+    8 IDHERE: IDENTIFIER .
+
+    $default  reduce using rule 8 (IDHERE)
+
+
+State 21
+
+    5 FUNCTION: DEF IDENTIFIER '(' ')' . COLON STATEMENTS ENDDEF
+
+    COLON  shift, and go to state 43
+
+
+State 22
+
+    4 FUNCTION: DEF IDENTIFIER '(' PARAMATERS . ')' COLON STATEMENTS ENDDEF
+    6 PARAMATERS: PARAMATERS . ',' IDHERE
+
+    ')'  shift, and go to state 44
+    ','  shift, and go to state 45
+
+
+State 23
+
+    7 PARAMATERS: IDHERE .
+
+    $default  reduce using rule 7 (PARAMATERS)
+
+
+State 24
+
+   39 FACTOR: TRUE .
+
+    $default  reduce using rule 39 (FACTOR)
+
+
+State 25
+
+   40 FACTOR: FALSE .
+
+    $default  reduce using rule 40 (FACTOR)
+
+
+State 26
+
+   36 FACTOR: NUMBER .
+
+    $default  reduce using rule 36 (FACTOR)
+
+
+State 27
+
+   38 FACTOR: IDENTIFIER .
+   45 CALL_STMT: IDENTIFIER . '(' ')'
+   46          | IDENTIFIER . '(' EXPR_LIST ')'
+
+    '('  shift, and go to state 17
+
+    $default  reduce using rule 38 (FACTOR)
+
+
+State 28
+
+   37 FACTOR: STRING .
+
+    $default  reduce using rule 37 (FACTOR)
+
+
+State 29
+
+   28 REL_EXP: '(' . REL_EXP ')'
+   35 FACTOR: '(' . EXP ')'
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 29
+    '-'         shift, and go to state 30
+
+    REL_EXP    go to state 46
+    EXP        go to state 47
+    TERM       go to state 34
+    FACTOR     go to state 35
+    CALL_STMT  go to state 36
+
+
+State 30
+
+   41 FACTOR: '-' . FACTOR
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 38
+    '-'         shift, and go to state 30
+
+    FACTOR     go to state 48
+    CALL_STMT  go to state 36
+
+
+State 31
+
+   52 EXPRESSION_LIST: EXPRESSION .
+
+    $default  reduce using rule 52 (EXPRESSION_LIST)
+
+
+State 32
+
+   20 EXPRESSION: REL_EXP .
+
+    $default  reduce using rule 20 (EXPRESSION)
+
+
+State 33
+
+   21 EXPRESSION: EXP .
+   22 REL_EXP: EXP . EQUALITY EXP
+   23        | EXP . NOTEQUAL EXP
+   24        | EXP . '<' EXP
+   25        | EXP . LESSTHEO EXP
+   26        | EXP . '>' EXP
+   27        | EXP . GREATERTHEO EXP
+   29 EXP: EXP . '+' TERM
+   30    | EXP . '-' TERM
+
+    EQUALITY     shift, and go to state 49
+    LESSTHEO     shift, and go to state 50
+    GREATERTHEO  shift, and go to state 51
+    NOTEQUAL     shift, and go to state 52
+    '<'          shift, and go to state 53
+    '>'          shift, and go to state 54
+    '+'          shift, and go to state 55
+    '-'          shift, and go to state 56
+
+    $default  reduce using rule 21 (EXPRESSION)
+
+
+State 34
+
+   31 EXP: TERM .
+   32 TERM: TERM . '*' FACTOR
+   33     | TERM . '/' FACTOR
+
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+
+    $default  reduce using rule 31 (EXP)
+
+
+State 35
+
+   34 TERM: FACTOR .
+
+    $default  reduce using rule 34 (TERM)
+
+
+State 36
+
+   42 FACTOR: CALL_STMT .
+
+    $default  reduce using rule 42 (FACTOR)
+
+
+State 37
+
+   43 PRINT_STMT: PRINT '(' EXPRESSION_LIST . ')'
+   51 EXPRESSION_LIST: EXPRESSION_LIST . ',' EXPRESSION
+
+    ')'  shift, and go to state 59
+    ','  shift, and go to state 60
+
+
+State 38
+
+   35 FACTOR: '(' . EXP ')'
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 38
+    '-'         shift, and go to state 30
+
+    EXP        go to state 61
+    TERM       go to state 34
+    FACTOR     go to state 35
+    CALL_STMT  go to state 36
+
+
+State 39
+
+   45 CALL_STMT: IDENTIFIER '(' ')' .
+
+    $default  reduce using rule 45 (CALL_STMT)
+
+
+State 40
+
+   29 EXP: EXP . '+' TERM
+   30    | EXP . '-' TERM
+   54 EXPR_LIST: EXP .
+
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+
+    $default  reduce using rule 54 (EXPR_LIST)
+
+
+State 41
+
+   46 CALL_STMT: IDENTIFIER '(' EXPR_LIST . ')'
+   53 EXPR_LIST: EXPR_LIST . ',' EXP
+
+    ')'  shift, and go to state 62
+    ','  shift, and go to state 63
+
+
+State 42
+
+   44 INPUT_STMT: IDENTIFIER '=' INPUT . '(' ')'
+
+    '('  shift, and go to state 64
+
+
+State 43
+
+    5 FUNCTION: DEF IDENTIFIER '(' ')' COLON . STATEMENTS ENDDEF
+
+    IF          shift, and go to state 65
+    WHILE       shift, and go to state 66
+    PRINT       shift, and go to state 7
+    RETURN      shift, and go to state 67
+    IDENTIFIER  shift, and go to state 68
+
+    STATEMENTS       go to state 69
+    STATEMENT        go to state 70
+    ASSIGNMENT_STMT  go to state 71
+    RETURN_STMT      go to state 72
+    PRINT_STMT       go to state 73
+    INPUT_STMT       go to state 74
+    CALL_STMT        go to state 75
+    CONDITION_STMT   go to state 76
+    IF_HEAD          go to state 77
+    WHILE_STMT       go to state 78
+
+
+State 44
+
+    4 FUNCTION: DEF IDENTIFIER '(' PARAMATERS ')' . COLON STATEMENTS ENDDEF
+
+    COLON  shift, and go to state 79
+
+
+State 45
+
+    6 PARAMATERS: PARAMATERS ',' . IDHERE
+
+    IDENTIFIER  shift, and go to state 20
+
+    IDHERE  go to state 80
+
+
+State 46
+
+   28 REL_EXP: '(' REL_EXP . ')'
+
+    ')'  shift, and go to state 81
+
+
+State 47
+
+   22 REL_EXP: EXP . EQUALITY EXP
+   23        | EXP . NOTEQUAL EXP
+   24        | EXP . '<' EXP
+   25        | EXP . LESSTHEO EXP
+   26        | EXP . '>' EXP
+   27        | EXP . GREATERTHEO EXP
+   29 EXP: EXP . '+' TERM
+   30    | EXP . '-' TERM
+   35 FACTOR: '(' EXP . ')'
+
+    EQUALITY     shift, and go to state 49
+    LESSTHEO     shift, and go to state 50
+    GREATERTHEO  shift, and go to state 51
+    NOTEQUAL     shift, and go to state 52
+    ')'          shift, and go to state 82
+    '<'          shift, and go to state 53
+    '>'          shift, and go to state 54
+    '+'          shift, and go to state 55
+    '-'          shift, and go to state 56
+
+
+State 48
+
+   41 FACTOR: '-' FACTOR .
+
+    $default  reduce using rule 41 (FACTOR)
+
+
+State 49
+
+   22 REL_EXP: EXP EQUALITY . EXP
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 38
+    '-'         shift, and go to state 30
+
+    EXP        go to state 83
+    TERM       go to state 34
+    FACTOR     go to state 35
+    CALL_STMT  go to state 36
+
+
+State 50
+
+   25 REL_EXP: EXP LESSTHEO . EXP
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 38
+    '-'         shift, and go to state 30
+
+    EXP        go to state 84
+    TERM       go to state 34
+    FACTOR     go to state 35
+    CALL_STMT  go to state 36
+
+
+State 51
+
+   27 REL_EXP: EXP GREATERTHEO . EXP
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 38
+    '-'         shift, and go to state 30
+
+    EXP        go to state 85
+    TERM       go to state 34
+    FACTOR     go to state 35
+    CALL_STMT  go to state 36
+
+
+State 52
+
+   23 REL_EXP: EXP NOTEQUAL . EXP
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 38
+    '-'         shift, and go to state 30
+
+    EXP        go to state 86
+    TERM       go to state 34
+    FACTOR     go to state 35
+    CALL_STMT  go to state 36
+
+
+State 53
+
+   24 REL_EXP: EXP '<' . EXP
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 38
+    '-'         shift, and go to state 30
+
+    EXP        go to state 87
+    TERM       go to state 34
+    FACTOR     go to state 35
+    CALL_STMT  go to state 36
+
+
+State 54
+
+   26 REL_EXP: EXP '>' . EXP
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 38
+    '-'         shift, and go to state 30
+
+    EXP        go to state 88
+    TERM       go to state 34
+    FACTOR     go to state 35
+    CALL_STMT  go to state 36
+
+
+State 55
+
+   29 EXP: EXP '+' . TERM
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 38
+    '-'         shift, and go to state 30
+
+    TERM       go to state 89
+    FACTOR     go to state 35
+    CALL_STMT  go to state 36
+
+
+State 56
+
+   30 EXP: EXP '-' . TERM
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 38
+    '-'         shift, and go to state 30
+
+    TERM       go to state 90
+    FACTOR     go to state 35
+    CALL_STMT  go to state 36
+
+
+State 57
+
+   32 TERM: TERM '*' . FACTOR
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 38
+    '-'         shift, and go to state 30
+
+    FACTOR     go to state 91
+    CALL_STMT  go to state 36
+
+
+State 58
+
+   33 TERM: TERM '/' . FACTOR
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 38
+    '-'         shift, and go to state 30
+
+    FACTOR     go to state 92
+    CALL_STMT  go to state 36
+
+
+State 59
+
+   43 PRINT_STMT: PRINT '(' EXPRESSION_LIST ')' .
+
+    $default  reduce using rule 43 (PRINT_STMT)
+
+
+State 60
+
+   51 EXPRESSION_LIST: EXPRESSION_LIST ',' . EXPRESSION
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 29
+    '-'         shift, and go to state 30
+
+    EXPRESSION  go to state 93
+    REL_EXP     go to state 32
+    EXP         go to state 33
+    TERM        go to state 34
+    FACTOR      go to state 35
+    CALL_STMT   go to state 36
+
+
+State 61
+
+   29 EXP: EXP . '+' TERM
+   30    | EXP . '-' TERM
+   35 FACTOR: '(' EXP . ')'
+
+    ')'  shift, and go to state 82
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+
+
+State 62
+
+   46 CALL_STMT: IDENTIFIER '(' EXPR_LIST ')' .
+
+    $default  reduce using rule 46 (CALL_STMT)
+
+
+State 63
+
+   53 EXPR_LIST: EXPR_LIST ',' . EXP
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 38
+    '-'         shift, and go to state 30
+
+    EXP        go to state 94
+    TERM       go to state 34
+    FACTOR     go to state 35
+    CALL_STMT  go to state 36
+
+
+State 64
+
+   44 INPUT_STMT: IDENTIFIER '=' INPUT '(' . ')'
+
+    ')'  shift, and go to state 95
+
+
+State 65
+
+   49 IF_HEAD: IF . EXPRESSION COLON
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 29
+    '-'         shift, and go to state 30
+
+    EXPRESSION  go to state 96
+    REL_EXP     go to state 32
+    EXP         go to state 33
+    TERM        go to state 34
+    FACTOR      go to state 35
+    CALL_STMT   go to state 36
+
+
+State 66
+
+   50 WHILE_STMT: WHILE . EXPRESSION COLON STATEMENTS ENDWHILE
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 29
+    '-'         shift, and go to state 30
+
+    EXPRESSION  go to state 97
+    REL_EXP     go to state 32
+    EXP         go to state 33
+    TERM        go to state 34
+    FACTOR      go to state 35
+    CALL_STMT   go to state 36
+
+
+State 67
+
+   19 RETURN_STMT: RETURN . EXP
+
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 38
+    '-'         shift, and go to state 30
+
+    EXP        go to state 98
+    TERM       go to state 34
+    FACTOR     go to state 35
+    CALL_STMT  go to state 36
+
+
+State 68
+
+   18 ASSIGNMENT_STMT: IDENTIFIER . '=' EXPRESSION
+   44 INPUT_STMT: IDENTIFIER . '=' INPUT '(' ')'
+   45 CALL_STMT: IDENTIFIER . '(' ')'
+   46          | IDENTIFIER . '(' EXPR_LIST ')'
+
+    '('  shift, and go to state 17
+    '='  shift, and go to state 99
+
+
+State 69
+
+    5 FUNCTION: DEF IDENTIFIER '(' ')' COLON STATEMENTS . ENDDEF
+    9 STATEMENTS: STATEMENTS . STATEMENT
+
+    ENDDEF      shift, and go to state 100
+    IF          shift, and go to state 65
+    WHILE       shift, and go to state 66
+    PRINT       shift, and go to state 7
+    RETURN      shift, and go to state 67
+    IDENTIFIER  shift, and go to state 68
+
+    STATEMENT        go to state 101
+    ASSIGNMENT_STMT  go to state 71
+    RETURN_STMT      go to state 72
+    PRINT_STMT       go to state 73
+    INPUT_STMT       go to state 74
+    CALL_STMT        go to state 75
+    CONDITION_STMT   go to state 76
+    IF_HEAD          go to state 77
+    WHILE_STMT       go to state 78
+
+
+State 70
+
+   10 STATEMENTS: STATEMENT .
+
+    $default  reduce using rule 10 (STATEMENTS)
+
+
+State 71
+
+   11 STATEMENT: ASSIGNMENT_STMT .
+
+    $default  reduce using rule 11 (STATEMENT)
+
+
+State 72
+
+   17 STATEMENT: RETURN_STMT .
+
+    $default  reduce using rule 17 (STATEMENT)
+
+
+State 73
+
+   12 STATEMENT: PRINT_STMT .
+
+    $default  reduce using rule 12 (STATEMENT)
+
+
+State 74
+
+   13 STATEMENT: INPUT_STMT .
+
+    $default  reduce using rule 13 (STATEMENT)
+
+
+State 75
+
+   16 STATEMENT: CALL_STMT .
+
+    $default  reduce using rule 16 (STATEMENT)
+
+
+State 76
+
+   14 STATEMENT: CONDITION_STMT .
+
+    $default  reduce using rule 14 (STATEMENT)
+
+
+State 77
+
+   47 CONDITION_STMT: IF_HEAD . STATEMENTS ENDDIF
+   48               | IF_HEAD . STATEMENTS ELSE COLON STATEMENTS ENDDIF
+
+    IF          shift, and go to state 65
+    WHILE       shift, and go to state 66
+    PRINT       shift, and go to state 7
+    RETURN      shift, and go to state 67
+    IDENTIFIER  shift, and go to state 68
+
+    STATEMENTS       go to state 102
+    STATEMENT        go to state 70
+    ASSIGNMENT_STMT  go to state 71
+    RETURN_STMT      go to state 72
+    PRINT_STMT       go to state 73
+    INPUT_STMT       go to state 74
+    CALL_STMT        go to state 75
+    CONDITION_STMT   go to state 76
+    IF_HEAD          go to state 77
+    WHILE_STMT       go to state 78
+
+
+State 78
+
+   15 STATEMENT: WHILE_STMT .
+
+    $default  reduce using rule 15 (STATEMENT)
+
+
+State 79
+
+    4 FUNCTION: DEF IDENTIFIER '(' PARAMATERS ')' COLON . STATEMENTS ENDDEF
+
+    IF          shift, and go to state 65
+    WHILE       shift, and go to state 66
+    PRINT       shift, and go to state 7
+    RETURN      shift, and go to state 67
+    IDENTIFIER  shift, and go to state 68
+
+    STATEMENTS       go to state 103
+    STATEMENT        go to state 70
+    ASSIGNMENT_STMT  go to state 71
+    RETURN_STMT      go to state 72
+    PRINT_STMT       go to state 73
+    INPUT_STMT       go to state 74
+    CALL_STMT        go to state 75
+    CONDITION_STMT   go to state 76
+    IF_HEAD          go to state 77
+    WHILE_STMT       go to state 78
+
+
+State 80
+
+    6 PARAMATERS: PARAMATERS ',' IDHERE .
+
+    $default  reduce using rule 6 (PARAMATERS)
+
+
+State 81
+
+   28 REL_EXP: '(' REL_EXP ')' .
+
+    $default  reduce using rule 28 (REL_EXP)
+
+
+State 82
+
+   35 FACTOR: '(' EXP ')' .
+
+    $default  reduce using rule 35 (FACTOR)
+
+
+State 83
+
+   22 REL_EXP: EXP EQUALITY EXP .
+   29 EXP: EXP . '+' TERM
+   30    | EXP . '-' TERM
+
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+
+    $default  reduce using rule 22 (REL_EXP)
+
+
+State 84
+
+   25 REL_EXP: EXP LESSTHEO EXP .
+   29 EXP: EXP . '+' TERM
+   30    | EXP . '-' TERM
+
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+
+    $default  reduce using rule 25 (REL_EXP)
+
+
+State 85
+
+   27 REL_EXP: EXP GREATERTHEO EXP .
+   29 EXP: EXP . '+' TERM
+   30    | EXP . '-' TERM
+
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+
+    $default  reduce using rule 27 (REL_EXP)
+
+
+State 86
+
+   23 REL_EXP: EXP NOTEQUAL EXP .
+   29 EXP: EXP . '+' TERM
+   30    | EXP . '-' TERM
+
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+
+    $default  reduce using rule 23 (REL_EXP)
+
+
+State 87
+
+   24 REL_EXP: EXP '<' EXP .
+   29 EXP: EXP . '+' TERM
+   30    | EXP . '-' TERM
+
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+
+    $default  reduce using rule 24 (REL_EXP)
+
+
+State 88
+
+   26 REL_EXP: EXP '>' EXP .
+   29 EXP: EXP . '+' TERM
+   30    | EXP . '-' TERM
+
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+
+    $default  reduce using rule 26 (REL_EXP)
+
+
+State 89
+
+   29 EXP: EXP '+' TERM .
+   32 TERM: TERM . '*' FACTOR
+   33     | TERM . '/' FACTOR
+
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+
+    $default  reduce using rule 29 (EXP)
+
+
+State 90
+
+   30 EXP: EXP '-' TERM .
+   32 TERM: TERM . '*' FACTOR
+   33     | TERM . '/' FACTOR
+
+    '*'  shift, and go to state 57
+    '/'  shift, and go to state 58
+
+    $default  reduce using rule 30 (EXP)
+
+
+State 91
+
+   32 TERM: TERM '*' FACTOR .
+
+    $default  reduce using rule 32 (TERM)
+
+
+State 92
+
+   33 TERM: TERM '/' FACTOR .
+
+    $default  reduce using rule 33 (TERM)
+
+
+State 93
+
+   51 EXPRESSION_LIST: EXPRESSION_LIST ',' EXPRESSION .
+
+    $default  reduce using rule 51 (EXPRESSION_LIST)
+
+
+State 94
+
+   29 EXP: EXP . '+' TERM
+   30    | EXP . '-' TERM
+   53 EXPR_LIST: EXPR_LIST ',' EXP .
+
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+
+    $default  reduce using rule 53 (EXPR_LIST)
+
+
+State 95
+
+   44 INPUT_STMT: IDENTIFIER '=' INPUT '(' ')' .
+
+    $default  reduce using rule 44 (INPUT_STMT)
+
+
+State 96
+
+   49 IF_HEAD: IF EXPRESSION . COLON
+
+    COLON  shift, and go to state 104
+
+
+State 97
+
+   50 WHILE_STMT: WHILE EXPRESSION . COLON STATEMENTS ENDWHILE
+
+    COLON  shift, and go to state 105
+
+
+State 98
+
+   19 RETURN_STMT: RETURN EXP .
+   29 EXP: EXP . '+' TERM
+   30    | EXP . '-' TERM
+
+    '+'  shift, and go to state 55
+    '-'  shift, and go to state 56
+
+    $default  reduce using rule 19 (RETURN_STMT)
+
+
+State 99
+
+   18 ASSIGNMENT_STMT: IDENTIFIER '=' . EXPRESSION
+   44 INPUT_STMT: IDENTIFIER '=' . INPUT '(' ')'
+
+    INPUT       shift, and go to state 42
+    TRUE        shift, and go to state 24
+    FALSE       shift, and go to state 25
+    NUMBER      shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    STRING      shift, and go to state 28
+    '('         shift, and go to state 29
+    '-'         shift, and go to state 30
+
+    EXPRESSION  go to state 106
+    REL_EXP     go to state 32
+    EXP         go to state 33
+    TERM        go to state 34
+    FACTOR      go to state 35
+    CALL_STMT   go to state 36
+
+
+State 100
+
+    5 FUNCTION: DEF IDENTIFIER '(' ')' COLON STATEMENTS ENDDEF .
+
+    $default  reduce using rule 5 (FUNCTION)
+
+
+State 101
+
+    9 STATEMENTS: STATEMENTS STATEMENT .
+
+    $default  reduce using rule 9 (STATEMENTS)
+
+
+State 102
+
+    9 STATEMENTS: STATEMENTS . STATEMENT
+   47 CONDITION_STMT: IF_HEAD STATEMENTS . ENDDIF
+   48               | IF_HEAD STATEMENTS . ELSE COLON STATEMENTS ENDDIF
+
+    IF          shift, and go to state 65
+    ENDDIF      shift, and go to state 107
+    ELSE        shift, and go to state 108
+    WHILE       shift, and go to state 66
+    PRINT       shift, and go to state 7
+    RETURN      shift, and go to state 67
+    IDENTIFIER  shift, and go to state 68
+
+    STATEMENT        go to state 101
+    ASSIGNMENT_STMT  go to state 71
+    RETURN_STMT      go to state 72
+    PRINT_STMT       go to state 73
+    INPUT_STMT       go to state 74
+    CALL_STMT        go to state 75
+    CONDITION_STMT   go to state 76
+    IF_HEAD          go to state 77
+    WHILE_STMT       go to state 78
+
+
+State 103
+
+    4 FUNCTION: DEF IDENTIFIER '(' PARAMATERS ')' COLON STATEMENTS . ENDDEF
+    9 STATEMENTS: STATEMENTS . STATEMENT
+
+    ENDDEF      shift, and go to state 109
+    IF          shift, and go to state 65
+    WHILE       shift, and go to state 66
+    PRINT       shift, and go to state 7
+    RETURN      shift, and go to state 67
+    IDENTIFIER  shift, and go to state 68
+
+    STATEMENT        go to state 101
+    ASSIGNMENT_STMT  go to state 71
+    RETURN_STMT      go to state 72
+    PRINT_STMT       go to state 73
+    INPUT_STMT       go to state 74
+    CALL_STMT        go to state 75
+    CONDITION_STMT   go to state 76
+    IF_HEAD          go to state 77
+    WHILE_STMT       go to state 78
+
+
+State 104
+
+   49 IF_HEAD: IF EXPRESSION COLON .
+
+    $default  reduce using rule 49 (IF_HEAD)
+
+
+State 105
+
+   50 WHILE_STMT: WHILE EXPRESSION COLON . STATEMENTS ENDWHILE
+
+    IF          shift, and go to state 65
+    WHILE       shift, and go to state 66
+    PRINT       shift, and go to state 7
+    RETURN      shift, and go to state 67
+    IDENTIFIER  shift, and go to state 68
+
+    STATEMENTS       go to state 110
+    STATEMENT        go to state 70
+    ASSIGNMENT_STMT  go to state 71
+    RETURN_STMT      go to state 72
+    PRINT_STMT       go to state 73
+    INPUT_STMT       go to state 74
+    CALL_STMT        go to state 75
+    CONDITION_STMT   go to state 76
+    IF_HEAD          go to state 77
+    WHILE_STMT       go to state 78
+
+
+State 106
+
+   18 ASSIGNMENT_STMT: IDENTIFIER '=' EXPRESSION .
+
+    $default  reduce using rule 18 (ASSIGNMENT_STMT)
+
+
+State 107
+
+   47 CONDITION_STMT: IF_HEAD STATEMENTS ENDDIF .
+
+    $default  reduce using rule 47 (CONDITION_STMT)
+
+
+State 108
+
+   48 CONDITION_STMT: IF_HEAD STATEMENTS ELSE . COLON STATEMENTS ENDDIF
+
+    COLON  shift, and go to state 111
+
+
+State 109
+
+    4 FUNCTION: DEF IDENTIFIER '(' PARAMATERS ')' COLON STATEMENTS ENDDEF .
+
+    $default  reduce using rule 4 (FUNCTION)
+
+
+State 110
+
+    9 STATEMENTS: STATEMENTS . STATEMENT
+   50 WHILE_STMT: WHILE EXPRESSION COLON STATEMENTS . ENDWHILE
+
+    IF          shift, and go to state 65
+    WHILE       shift, and go to state 66
+    ENDWHILE    shift, and go to state 112
+    PRINT       shift, and go to state 7
+    RETURN      shift, and go to state 67
+    IDENTIFIER  shift, and go to state 68
+
+    STATEMENT        go to state 101
+    ASSIGNMENT_STMT  go to state 71
+    RETURN_STMT      go to state 72
+    PRINT_STMT       go to state 73
+    INPUT_STMT       go to state 74
+    CALL_STMT        go to state 75
+    CONDITION_STMT   go to state 76
+    IF_HEAD          go to state 77
+    WHILE_STMT       go to state 78
+
+
+State 111
+
+   48 CONDITION_STMT: IF_HEAD STATEMENTS ELSE COLON . STATEMENTS ENDDIF
+
+    IF          shift, and go to state 65
+    WHILE       shift, and go to state 66
+    PRINT       shift, and go to state 7
+    RETURN      shift, and go to state 67
+    IDENTIFIER  shift, and go to state 68
+
+    STATEMENTS       go to state 113
+    STATEMENT        go to state 70
+    ASSIGNMENT_STMT  go to state 71
+    RETURN_STMT      go to state 72
+    PRINT_STMT       go to state 73
+    INPUT_STMT       go to state 74
+    CALL_STMT        go to state 75
+    CONDITION_STMT   go to state 76
+    IF_HEAD          go to state 77
+    WHILE_STMT       go to state 78
+
+
+State 112
+
+   50 WHILE_STMT: WHILE EXPRESSION COLON STATEMENTS ENDWHILE .
+
+    $default  reduce using rule 50 (WHILE_STMT)
+
+
+State 113
+
+    9 STATEMENTS: STATEMENTS . STATEMENT
+   48 CONDITION_STMT: IF_HEAD STATEMENTS ELSE COLON STATEMENTS . ENDDIF
+
+    IF          shift, and go to state 65
+    ENDDIF      shift, and go to state 114
+    WHILE       shift, and go to state 66
+    PRINT       shift, and go to state 7
+    RETURN      shift, and go to state 67
+    IDENTIFIER  shift, and go to state 68
+
+    STATEMENT        go to state 101
+    ASSIGNMENT_STMT  go to state 71
+    RETURN_STMT      go to state 72
+    PRINT_STMT       go to state 73
+    INPUT_STMT       go to state 74
+    CALL_STMT        go to state 75
+    CONDITION_STMT   go to state 76
+    IF_HEAD          go to state 77
+    WHILE_STMT       go to state 78
+
+
+State 114
+
+   48 CONDITION_STMT: IF_HEAD STATEMENTS ELSE COLON STATEMENTS ENDDIF .
+
+    $default  reduce using rule 48 (CONDITION_STMT)

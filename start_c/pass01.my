@@ -1,0 +1,12 @@
+!pass01.my
+def absv(x):
+  if x < x:
+    return -x
+  else:
+    if x >= 0 :
+       return x
+    endif
+  endif
+enddef
+print (absv(2), "other", absv(-3))
+
